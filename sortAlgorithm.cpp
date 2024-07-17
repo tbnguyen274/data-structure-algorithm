@@ -158,15 +158,43 @@ void heapSort(int a[], int n) {
     }
 }
 
+// counting sort
+// Time complexity: O(n+k)
+int* countingSort(int a[], int n) {
+    int max = a[0];
+    for (int i = 1; i < n; i++) {
+        if (a[i] > max) {
+            max = a[i];
+        }
+    }
+    int* count = new int[max+1] {0};
+    for (int i = 0; i < n; i++) {
+        count[a[i]]++;
+    }
+    // count[i] now contains the number of elements equal to i
+    for (int i = 1; i <= max; i++) {
+        count[i] += count[i-1];
+    }
+    // count[i] now contains the number of elements less than or equal to i
+    int* output = new int[n];
+    for (int i = n-1; i >= 0; i--) {
+        output[count[a[i]]-1] = a[i];
+        count[a[i]]--;
+    }
+    delete[] count;
+    return output;
+}
+
 int main() {
     int n = 8;
-    int* A = new int[n+1] {0, 2, 4, 5, 7, 1, 8, 3, 6};
+    int* A = new int[n+1] {2, 4, 5, 7, 1, 8, 3, 6};
     print(A, n);
     //mergeSort(A, 0, n-1);
     //insertionSort(A, n);
     //bubbleSort(A, n);
-    heapSort(A, n);
-    print(A, n+1);
+    //heapSort(A, n);
+    int* output = countingSort(A, n);
+    print(output, n);
 
     return 0;
 }
