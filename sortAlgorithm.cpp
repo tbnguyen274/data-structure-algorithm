@@ -185,6 +185,16 @@ int* countingSort(int a[], int n) {
     return output;
 }
 
+// radix sort
+// Time complexity: O(d*(n+k))
+// d: number of digits in the largest number
+// k: base of the number system
+// implement radix sort using counting sort function
+
+// bucket sort
+// Time complexity: O(n^2)
+
+
 int main() {
     int n = 8;
     int* A = new int[n+1] {2, 4, 5, 7, 1, 8, 3, 6};
