@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "c:/Users/DELL/OneDrive - VNU-HCMUS/Github/data-structure-algorithm",
-      "program": "c:/Users/DELL/OneDrive - VNU-HCMUS/Github/data-structure-algorithm/build/Debug/outDebug",
+      "cwd": "c:/Users/DELL/OneDrive - VNU-HCMUS/Github/data-structure-algorithm/Graph Algorithms",
+      "program": "c:/Users/DELL/OneDrive - VNU-HCMUS/Github/data-structure-algorithm/Graph Algorithms/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
