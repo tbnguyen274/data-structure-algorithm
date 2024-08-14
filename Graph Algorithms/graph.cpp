@@ -1,45 +1,81 @@
-#include <iostream>
-#include <string>
+#include <bits/stdc++.h>
+#include "graphRepresentation.h"
 using namespace std;
 
-struct vertex {
-    string color; // white, gray, black
-    int distance; // distance
-    vertex* pi; // v’s predecessor in the breadth-ûrst tree
-};
+#define MAX 100
 
-// BFS in graph
-// Time complexity: O(V+E)
-void BFS(int a[][6], vertex* vertices, int n, int s) {
+void input(vector<int> adj[MAX], int& m, int& n) {
+    cin >> m >> n;
     for (int i = 0; i < n; i++) {
-        if (i != s) {
-            vertices[i].color = "white";
-            vertices[i].distance = 0;
-            vertices[i].pi = NULL;
-        }
-    }
-    vertices[s].color = "gray";
-    vertices[s].distance = 0;
-    vertices[s].pi = NULL;
-    int q[n];
-    int front = 0;
-    int rear = 0;
-    q[rear] = s;
-    rear++;
-    while (front != rear) {
-        int u = q[front];
-        front++;
-        for (int v = 0; v < n; v++) {
-            if (a[u][v] == 1) {
-                if (vertices[v].color == "white") {
-                    vertices[v].color = "gray";
-                    vertices[v].distance = vertices[u].distance + 1;
-                    vertices[v].pi = &vertices[u];
-                    q[rear] = v;
-                    rear++;
-                }
-            }
-        }
-        vertices[u].color = "black";
+        int u, v;
+        cin >> u >> v;
+        adj[u].push_back(v);
+        // for directed graphs, the following line should be removed
+        adj[v].push_back(u);
     }
 }
+
+void dfs(vector<int> adj[MAX], bool visited[MAX], int u) {
+    visited[u] = true;
+    cout << u << " ";
+    for (int i = 0; i < adj[u].size(); i++) {
+        int v = adj[u][i];
+        if (!visited[v]) {
+            dfs(adj, visited, v);
+        }
+    }
+    /*
+    Another way:
+    for (int v : adj[u]) {
+        if (!visited[v]) {
+            dfs(adj, visited, v);
+        }
+    }
+    */
+}
+
+int main() {
+    int a[MAX][MAX] = {0};
+    vector<int> adj[MAX];
+    vector<pair<int, int>> edge;
+    bool visited[MAX];
+    memset(visited, 0, sizeof(visited));
+    int m, n;
+    
+    //transfer1(a, m, n);
+    //transfer2(adj, m, n);
+    //transfer3(edge, a, n);
+    //transfer4(adj, a, n);
+    //transfer5(a, adj, n);
+    //transfer6(edge, adj, n);
+
+    input(adj, m, n);
+    dfs(adj, visited, 1);
+    
+    return 0;
+}
+
+/*
+5
+0 1 1 1 0
+1 0 1 1 1
+1 1 0 1 1
+1 1 1 0 1
+0 1 1 1 0
+
+1 2
+1 3
+1 4
+2 3
+2 4
+2 5
+3 4
+3 5
+4 5
+
+1: 2 3 4
+2: 1 3 4 5
+3: 1 2 4 5
+4: 1 2 3 5
+5: 2 3 4
+*/
