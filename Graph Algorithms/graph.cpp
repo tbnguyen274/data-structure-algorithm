@@ -34,6 +34,25 @@ void dfs(vector<int> adj[MAX], bool visited[MAX], int u) {
     */
 }
 
+void bfs(vector<int> adj[MAX], bool visited[MAX], int u) {
+    queue<int> q;
+    q.push(u);
+    visited[u] = true;
+
+    while(!q.empty()) {
+        int v = q.front();
+        q.pop();
+        cout << v << " ";
+        for (int i = 0; i < adj[v].size(); i++) {
+            int w = adj[v][i];
+            if (!visited[w]) {
+                q.push(w);
+                visited[w] = true;
+            }
+        }
+    }
+}
+
 int main() {
     int a[MAX][MAX] = {0};
     vector<int> adj[MAX];
@@ -41,7 +60,7 @@ int main() {
     bool visited[MAX];
     memset(visited, 0, sizeof(visited));
     int m, n;
-    
+
     //transfer1(a, m, n);
     //transfer2(adj, m, n);
     //transfer3(edge, a, n);
@@ -50,7 +69,8 @@ int main() {
     //transfer6(edge, adj, n);
 
     input(adj, m, n);
-    dfs(adj, visited, 1);
+    //dfs(adj, visited, 1);
+    bfs(adj, visited, 1);
     
     return 0;
 }
