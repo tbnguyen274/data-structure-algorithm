@@ -15,43 +15,16 @@ void input(vector<int> adj[MAX], int& m, int& n) {
     }
 }
 
-void dfs(vector<int> adj[MAX], bool visited[MAX], int u) {
-    visited[u] = true;
-    cout << u << " ";
-    for (int i = 0; i < adj[u].size(); i++) {
-        int v = adj[u][i];
-        if (!visited[v]) {
-            dfs(adj, visited, v);
-        }
-    }
-    /*
-    Another way:
-    for (int v : adj[u]) {
-        if (!visited[v]) {
-            dfs(adj, visited, v);
-        }
-    }
-    */
-}
+/*
+Let graph G = <V,E>
+Consider the time complexity of the following representations:
+- adjacency matrix: O(V*V)
+- egde list: O(V*E)
+- adjacency list: O(V+E)
+*/
+void dfs(vector<int> adj[MAX], bool visited[MAX], int u);
+void bfs(vector<int> adj[MAX], bool visited[MAX], int u);
 
-void bfs(vector<int> adj[MAX], bool visited[MAX], int u) {
-    queue<int> q;
-    q.push(u);
-    visited[u] = true;
-
-    while(!q.empty()) {
-        int v = q.front();
-        q.pop();
-        cout << v << " ";
-        for (int i = 0; i < adj[v].size(); i++) {
-            int w = adj[v][i];
-            if (!visited[w]) {
-                q.push(w);
-                visited[w] = true;
-            }
-        }
-    }
-}
 
 int main() {
     int a[MAX][MAX] = {0};
@@ -99,3 +72,41 @@ int main() {
 4: 1 2 3 5
 5: 2 3 4
 */
+
+void dfs(vector<int> adj[MAX], bool visited[MAX], int u) {
+    visited[u] = true;
+    cout << u << " ";
+    for (int i = 0; i < adj[u].size(); i++) {
+        int v = adj[u][i];
+        if (!visited[v]) {
+            dfs(adj, visited, v);
+        }
+    }
+    /*
+    Another way:
+    for (int v : adj[u]) {
+        if (!visited[v]) {
+            dfs(adj, visited, v);
+        }
+    }
+    */
+}
+
+void bfs(vector<int> adj[MAX], bool visited[MAX], int u) {
+    queue<int> q;
+    q.push(u);
+    visited[u] = true;
+
+    while(!q.empty()) {
+        int v = q.front();
+        q.pop();
+        cout << v << " ";
+        for (int i = 0; i < adj[v].size(); i++) {
+            int w = adj[v][i];
+            if (!visited[w]) {
+                q.push(w);
+                visited[w] = true;
+            }
+        }
+    }
+}

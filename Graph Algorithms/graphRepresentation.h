@@ -101,7 +101,7 @@ void transfer5(int a[][MAX], vector<int> adj[MAX], int& n) {
     }
 }
 
-// from adjecent list to edge list
+// from adjacency list to edge list
 void transfer6(vector<pair<int, int>> edge, vector<int> adj[MAX], int& n) {
     cin >> n;
     cin.ignore();
