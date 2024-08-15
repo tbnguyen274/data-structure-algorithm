@@ -25,6 +25,22 @@ Consider the time complexity of the following representations:
 void dfs(vector<int> adj[MAX], bool visited[MAX], int u);
 void bfs(vector<int> adj[MAX], bool visited[MAX], int u);
 
+int componentConnected(vector<int> adj[MAX], int m) {
+    int count = 0;
+    bool visited[MAX];
+    memset(visited, false, sizeof(visited));
+    for (int i = 1; i <= m; i++) {
+        if (!visited[i]) {
+            count++;
+            dfs(adj, visited, i);
+            // we can also use bfs instead of dfs
+            // bfs(adj, visited, i);
+        }
+    }
+    cout << endl;
+    return count;
+}
+
 
 int main() {
     int a[MAX][MAX] = {0};
@@ -43,8 +59,10 @@ int main() {
 
     input(adj, m, n);
     //dfs(adj, visited, 1);
-    bfs(adj, visited, 1);
-    
+    //bfs(adj, visited, 1);
+
+    cout << "The number of connected components: ";
+    cout << componentConnected(adj, m) << endl;
     return 0;
 }
 
